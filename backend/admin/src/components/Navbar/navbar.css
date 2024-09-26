@@ -1,0 +1,23 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 60px;
+    box-shadow: 0 1px 3px -2px #000;
+    margin-bottom: 1px;
+    background: white;
+    height: 60px;
+}
+.navbar p{
+    color: red;
+    font-size: 15px;
+    margin-left: -82em;
+    margin-top: 2em;
+}
+.nav-logo{
+   width: 55px;
+}
+.navprof{
+    width: 75px;
+    cursor: pointer;
+}
