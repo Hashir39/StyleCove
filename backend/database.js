@@ -94,7 +94,11 @@ export default function PlatformLog() {
         `&limit=${pagination.itemsPerPage}`
       );
       if (res.status === 200) {
-        console.log("Logs fetched successfully:", res.data.data);
+        console.log("[PlatformLog] Logs fetched successfully:", res.data.data);
+        // Log each user's IP/device for debugging
+        res.data.data.forEach((log, idx) => {
+          console.log(`[PlatformLog] Log #${idx + 1}: user=${log.user_name || log.user_id}, ipAddress=${log.ipAddress}, deviceInfo=${log.deviceInfo}`);
+        });
         setLogs(res.data.data);
         setPagination({
           currentPage: res.data.pagination.currentPage,
@@ -104,7 +108,7 @@ export default function PlatformLog() {
         });
       }
     } catch (err) {
-      console.error(err);
+      console.error('[PlatformLog] Error fetching logs:', err);
     } finally {
       setLoading(false);
     }
@@ -297,8 +301,8 @@ export default function PlatformLog() {
                     <td className="px-4 py-3">
                       <span
                         className={`inline-block rounded px-2 py-1 text-xs font-semibold ${el.action_status === "SUCCESS"
-                            ? "bg-green-100 text-green-700"
-                            : "bg-red-100 text-red-700"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
                           }`}
                       >
                         {el.action_status}
@@ -421,6 +425,12 @@ export default function PlatformLog() {
                     <td className="px-4 py-3 whitespace-nowrap text-gray-700">
                       {moment(el.created_at).format("YYYY-MM-DD")}
                     </td>
+                    <td className="px-4 py-3 text-gray-700">
+                      {el.ipAddress || "-"}
+                    </td>
+                    <td className="px-4 py-3 text-gray-700">
+                      {el.deviceInfo || "-"}
+                    </td>
                   </tr>
                 ))}
             </tbody>
@@ -434,14 +444,4 @@ export default function PlatformLog() {
       </div>
     </div>
   );
-}<td className="px-4 py-3 text-gray-700">
-  {el.ipAddress || "-"}
-</td>
-<td className="px-4 py-3 text-gray-700">
-  {el.deviceInfo || "-"}
-</td>
-
-
-
-
-
+}
