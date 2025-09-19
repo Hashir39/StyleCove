@@ -14,6 +14,28 @@ const connectToMongo = async () => {
 module.exports = connectToMongo;
 
 
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+  build: {
+    outDir: "build",
+  },
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
+  optimizeDeps: {
+    include: ["@mui/material/Box", "@mui/material", '@emotion/react',        // ensure Emotion core is bundled 
+      '@emotion/styled',       // ensure Emotion styled engine is bundled 
+      '@mui/material/Tooltip', // pull in MUI component that uses Popper/ styled_default 
+      // add any others you use that trigger the error, e.g.:
+      '@mui/material/Unstable_Grid2' ],
+  },
+});
 
 
 
