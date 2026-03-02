@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Schema for creating products
 const productSchema = new mongoose.Schema({
     id: {
-        type: Number, // Acts like a foreign key
+        type: Number, 
         required: true
     },
     name: {
