@@ -4,13 +4,13 @@ import { useState } from "react";
 
 const Addproduct = () => {
   const [image, setimage] = useState(null);
-  // const [productdetails, setproductdetails] = useState({
-  //   name: "",
-  //   image: "",
-  //   category: "women",
-  //   new_price: "",
-  //   old_price: "",
-  // });
+  const [productdetails, setproductdetails] = useState({
+    name: "",
+    image: "",
+    category: "women",
+    new_price: "",
+    old_price: "",
+  });
 
   const imageHandler = (e) => {
     setimage(e.target.files[0]);
