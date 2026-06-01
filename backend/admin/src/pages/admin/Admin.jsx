@@ -5,7 +5,7 @@ import "./admin.css";
 import { Routes, Route } from "react-router-dom";
 
 const Admin = () => {
-  s
+  
   return (
     <div className="admin">
       <Sidebas />
