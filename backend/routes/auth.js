@@ -7,30 +7,30 @@ const User = require('../models/Userschema')
 
 
 
-// //Image Storage Engine
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, path.join(__dirname, '../upload/images'));
-//     },
-//     filename: (req, file, cb) => {
-//         return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
-//     }
-// })
+//Image Storage Engine
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '../upload/images'));
+    },
+    filename: (req, file, cb) => {
+        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+    }
+})
 
-// const upload = multer({ storage: storage })
+const upload = multer({ storage: storage })
 
-// //Create upload endpoint for images
-// const imagesPath = path.join(__dirname, '../upload/images');
-// console.log('Serving images from:', imagesPath); // Log the path being used
-// router.use('/images', express.static(imagesPath));
+//Create upload endpoint for images
+const imagesPath = path.join(__dirname, '../upload/images');
+console.log('Serving images from:', imagesPath); // Log the path being used
+router.use('/images', express.static(imagesPath));
 
 
-// router.post('/upload', upload.single('product'), (req, res) => {
-//     res.json({
-//         success: 1,
-//         image_url: `http://localhost:${port}/images/${req.file.filename}`
-//     })
-// })
+router.post('/upload', upload.single('product'), (req, res) => {
+    res.json({
+        success: 1,
+        image_url: `http://localhost:${port}/images/${req.file.filename}`
+    })
+})
 
 
 
